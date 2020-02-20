@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="a">
+        <h1>{{ title }}</h1>
+    </div>
+    <!-- <script type="module">
+        //import * as all from './2-19.js';
+        //console.log(all.txt);
+        import data from './2-19.js';
+        console.log(data);
+
+        //promise 是es6中特殊语法
+        
+        
+        //2.功能:
+        //    1.解决了异步问题
+        //   2.解决回调地狱 提高了代码可读性
+        //应用场景
+        //Ajax运用时发送成功resolve,
+        //发送失败reject
+    </script> -->
+    
+    <script src="../lib/vue@2.5.16/vue.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: "#a",//数据传输点
+            data:{// 数据驱动 data不能变
+                title: '这是一个盒子'
+            }
+        });
+        //const: 定义常量
+
+
+    </script>
+</body>
+</html>
