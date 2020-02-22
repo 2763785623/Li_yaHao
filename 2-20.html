@@ -29,7 +29,7 @@
         <h5 v-html='a'></h5>
         <img v-bind:src="src" :alt="alt" :title="title"> 
         <form action="">
-            <input type="text" name="" v-modle="str2">
+            <input type="text" name="" v-model="str2">
             <p>{{ str2 }}</p>
         </form>
         
@@ -55,7 +55,7 @@
             v-bind : 属性名 = '值'
             可以简写为 : 属性名 = '值'
 
-            v-modle: 双向数据绑定
+            v-model: 双向数据绑定
                 一般的作用和应用场景 都是针对于 form 表单(数据收集)
         */
         const vm = new Vue({
