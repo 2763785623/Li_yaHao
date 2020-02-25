@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../lib/vue@2.5.16/vue.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="app">
+        <p v-html='title2'></p>
+        <!-- .once  只能触发一次 -->
+        <button @click.once='tan()'>点击</button>
+
+
+    </div>
+    <script>
+        /*
+			鼠标修饰符
+				.left 左键
+				.right 右键
+				.middle 中间
+
+			系统修饰符
+				.ctrl
+				.shift
+				.alt 
+
+		 */
+
+         /*
+			密码检测：
+				123456 弱
+				abc123 中
+				a123!@# 强
+				!@#!@#! 弱
+
+		
+			键盘修饰符
+				.down 下
+				.up  上
+				.left 左
+				.right 右
+				.enter 回车
+
+		 */
+        const vm = new Vue({
+            el: '.app',
+            data: {
+                title: '中华人民共和国',
+                title2: '',
+            },
+            methods: {
+                way: function() {
+                    let index = 0;
+                    setInterval(() => {
+                        let arr = this.title.split('');//分割成数组
+                        let num = '<span style="color: red; font-size: 25px; font-weight: bold">' + arr[index] + '</span>'
+                        arr[index] = num;
+                        
+                        this.title2 = arr.join('');
+                        index++;
+                        if(index == arr.length) {
+                            index = 0;
+                        }
+                    },1000);
+                    
+                },
+                tan: function(){
+                    alert('弹出来了')
+                }
+            }
+        });
+        vm.way();
+    </script>
+</body>
+</html>
