@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../lib/vue@2.5.16/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p id="p" v-html='title'></p>
+        <button @click='dian'>{{ a }}</button>
+    </div>
+    <script>
+        /*
+            钩子函数:
+                1.钩子函数 也是 函数
+            a    2.函数本身 又触发场景 自己触发，不需手动调用
+                3.钩子函数 也叫 生命周期函数 (对象 出生 到 销毁 过程)
+        
+        
+        */
+        const vm = new Vue({
+            // el: '#app',
+            data: {
+                title: '钩子函数',
+                a: '点击哦'
+            },
+            methods: {
+                dian(){
+                    this.title = '<span style="color: red;">点击哦</span>'
+                }
+            },
+            beforeCreate: function(){
+                // let kuai = document.querySelector('#p').innerHTML;
+                // let kuai2 = this.title;
+                // console.log(kuai,kuai2);
+                // Vue对象刚初始化 钩子函数 和 简单事件，数据和方法加载不出来
+            },
+            created: function() {
+                //Vue对象 已经加载出来 数据 和 方法，可以获取到数据
+                console.log(this.title);
+            },
+            beforeMount: function() {
+                // 此时在内存编译完成 数据还没有替换到 真实 dome中
+                let kuai = document.querySelector('#p').innerHTML;
+                let kuai2 = this.title;
+                console.log(kuai,kuai2);
+            },
+            mounted: function() {
+                // 已经完成了 真实 dome 的替换  保持一致了
+                let kuai = document.querySelector('#p').innerHTML;
+                let kuai2 = this.title;
+                console.log(kuai,kuai2);
+            },
+            beforeUpdate() {
+                //数据在内存中完成修改 
+                let kuai = document.querySelector('#p').innerHTML;
+                console.log(kuai);
+            },
+            updated() {
+                //此时在 虚拟dome完成修改 并且替换了 真实dome
+                //真实dome 与 虚拟dome一致
+                let kuai = document.querySelector('#p').innerHTML;
+                console.log(kuai);
+            }
+        }).$mount('#app');
+        //vm.$mount('#app') == el: '#app',
+        // console.log(vm);
+        // console.log(vm.$el);
+        // vm.$el.style.border = '1px solid red';
+        // vm.$data.title = '中华人民共和国'
+        //vm.$el ==  el: '#app',
+        // Vue对象 为了 区别在类中使用 的方法，vm对象的属性 一般都有 $
+    </script>
+</body>
+</html>
