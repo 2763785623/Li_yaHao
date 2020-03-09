@@ -13,20 +13,21 @@
         </my-a> -->
         <!-- <my-a :name="'李小龙'"></my-a>
         <my-a :name='name1'></my-a> -->
-        <my-b>
+        <my-b></my-b>
             <ul slot:nanren>
                 <li>成龙</li>
                 <li>李小龙</li>
                 <li>甄子丹</li>   
             </ul>
-            <template v-slot:yanzhi>
-                <ul>
+            <h3>颜值</h3>
+            <ul slot:yanzhi>
+                
                     <li>黄子韬</li>
                     <li>鹿晗</li>
                     <li>赵本山</li>   
-                </ul>
-            </template>
-        </my-b>
+                
+            </ul>
+        
     </div>
     
     <template id="b">
@@ -41,7 +42,7 @@
             <h3>男人</h3>
             <slot name='nanren'></slot>
            
-            <h3>颜值</h3>
+            
             <slot name='yanzhi'></slot>
             
         </div>

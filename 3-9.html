@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+</head>
+<script type="text/javascript" src="../lib/vue@2.5.16/vue.js"></script>
+<body>
+	<div id="app" class="container">
+		<h1 class="text-center text-info">{{ title }}</h1>
+		<ul class="nav nav-tabs">
+		  <li role="presentation" :class="{active:xianshi == 'shouye'}"  @click="xianshi = 'shouye'"><a href="javascript:;">首页</a></li>
+		  <li role="presentation" :class="{active:xianshi == 'denglu'}"  @click="xianshi = 'denglu'"><a href="javascript:;">登录</a></li>
+		</ul>
+		<div class="row">
+			<div class="col-md-12">
+				<transition :duration="{ enter: 300, leave: 300 }" enter-active-class="fadeIn" leave-active-class="fadeOut" mode="out-in">
+					<keep-alive>
+						<componet :is="xianshi" class="animated"></componet>
+					</keep-alive>
+				</transition>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- home 组件模板 -->
+	<template id="shouye">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="jumbotron">
+				  <h1>欢迎进入!!!</h1>
+				</div>
+			</div>
+		</div>
+	</template>
+	
+	<!-- login 组件模板 -->
+	<template id="denglu">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="list-group">
+				  <a href="javascript:;" @click="logintabname = 'email'" :class="{'list-group-item':true,active:logintabname == 'email'}">邮箱登录</a>
+				  <a href="javascript:;" @click="logintabname = 'shouji'" :class="{'list-group-item':true,active:logintabname == 'shouji'}">手机号登录</a>
+				  <a href="javascript:;" @click="logintabname = 'mingzi'" :class="{'list-group-item':true,active:logintabname == 'mingzi'}">用户名登录</a>
+				</div>
+			</div>
+			<div class="col-md-10">
+				<component :is="logintabname"></component>
+			</div>
+		</div>
+	</template>
+
+	<!-- 手机号登录组件 -->
+	<template id="shouji">
+		<form class="form-horizontal">
+			  <div class="form-group">
+			    <label for="inputEmail3" class="col-sm-2 control-label">手机号登录</label>
+			    <div class="col-sm-10">
+			      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-default">手机号登录</button>
+			    </div>
+			  </div>
+			</form>
+	</template>
+
+
+	<template id="email">
+		<form class="form-horizontal">
+			  <div class="form-group">
+			    <label for="inputEmail3" class="col-sm-2 control-label">邮箱登录</label>
+			    <div class="col-sm-10">
+			      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-default">邮箱登录</button>
+			    </div>
+			  </div>
+			</form>
+	</template>
+
+	<template id="mingzi">
+		<form class="form-horizontal">
+			<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">用户名登录</label>
+			<div class="col-sm-10">
+				<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">用户名登录</button>
+			</div>
+			</div>
+		</form>
+	</template>
+
+	<script type="text/javascript">
+		
+		// 注册组件
+		Vue.component('shouye',{template:'#shouye'});
+		Vue.component('denglu',{
+			template:'#denglu',
+			data(){
+				return {
+					logintabname:"email"
+				}
+			}
+		});
+		Vue.component('shouji',{template:'#shouji'});
+		Vue.component('email',{template:'#email'});
+		Vue.component('mingzi',{template:'#mingzi'});
+
+		const vm = new Vue({
+			el:"#app",
+			data:{
+				title:'Vue组件案例',
+				xianshi:"shouye"	
+			}
+		})
+
+	</script>
+</body>
+</html>
