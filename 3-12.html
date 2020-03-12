@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../lib/vue-2.6.10.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="container">
+        <!-- <h3 class="text-info text-center">留言板</h3>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="(item, index) in items" :key="index">
+                <span class="badge" v-text="item.uname"></span>
+                <span v-text="item.say"></span>
+            </li>
+        </ul> -->
+
+        <!-- <my-nei v-on:func="addItems"></my-nei> -->
+
+
+        <form action="" @submit.prevent="commit()">
+            用户：<input type="text" v-model="uname"><br>
+            密码：<input type="text" v-model="upass"><br>
+            <input type="submit" :disabled="!disabled">
+        </form>
+    </div>
+
+    <!-- <template id="nei">
+        <div>
+            <h3 class="text-center">编辑内容</h3>
+            <form @submit.prevent="commit()">
+                <div class="form-group">
+                    <label for="uname">用户名</label>
+                    <input type="text" class="form-control" id="uname" placeholder="用户名" v-model="uname">
+                </div>
+                <div class="form-group">
+                    <label for="content">内容</label>
+                    <textarea id="content" class="form-control" cols="30" rows="10" maxlength="120"
+                        placeholder="最多只能 bb 120字" v-model="say"></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger form-control">Submit</button>
+            </form>
+        </div>
+    </template> -->
+
+    <script>
+
+            /* 
+            vm对象 $refs 属性  获取节点
+
+                获取  子组件对象  也可以  获取 dom 节点
+
+                作用： 
+                    1. 直接在vue当中操作 dom 节点
+                    2. 直接可以操作 vue 子组件
+
+                    使用方式： 
+                        html
+                            <my-child ref="xxx"></my-child>
+                            <p ref='xx'></p>
+
+                        js
+                            this.$refs
+
+                            const vm = new Vue()
+                            vm.$refs;
+
+                但是：
+                    一般情况 vue 推荐操作 数据，并不是直接操作dom实现功能
+                    
+
+         */
+
+
+        // Vue.component('my-nei',{
+        //     template:'#nei',
+        //     props: ['func'],
+        //     methods: {
+        //         commit() {
+        //             let jsondata = {
+        //                 uname: this.uname,
+        //                 say: this.say
+        //             };
+        //             this.$emit('func', jsondata);
+        //             let arr = JSON.parse(localStorage.getItem('common_data') || '[]'); //null []
+        //             arr.push(jsondata)
+        //             // 本地存储
+        //             localStorage.setItem('common_data', JSON.stringify(arr)) //要求压入json字符串 
+
+        //         }
+        //     },
+        //     data() {
+        //         return {
+        //             uname: '',
+        //             say: '',
+        //         }
+        //     }
+        // });
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                uname: '',
+                upass: '',
+                // items: [
+                //     {
+                //         uname: '李小龙',
+                //         say: '天下武功唯快不破'
+                //     }
+                // ]
+            },
+            methods: {
+                commit() {
+                    alert('您的账号：'+this.uname+'您的密码是：'+this.upass)
+                },
+                // addItems(str) {
+                //     this.items.push(str);
+                // },
+                // getCommons(){
+                //     this.items = JSON.parse(localStorage.getItem('common_data') || '[]');
+                // }
+            },
+            computed: {
+                disabled:function(){
+                    let preg = /^[a-z]{1}[\w]{5,17}$/;
+                    return preg.test(this.uname) && this.upass.length > 5;
+                }
+                
+            },
+            // mounted() {
+            //     this.getCommons();
+            // }
+        })
+    </script>
+</body>
+</html>
